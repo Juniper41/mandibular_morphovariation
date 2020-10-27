@@ -44,5 +44,5 @@ _If you find a broken link or corrupt file, please create an issue to let me kno
 
 ## Images
 
-![Landmarked _P.maniculatus_ mandible.](file:///Users/june/mandibular_morphovariation/mandibular_morphovariation/output/EstimatedPlot%20(2).jpeg "Landmarked Deer Mouse mandible")
+![Landmarked _P.maniculatus_ mandible.](/output/EstimatedPlot (2).jpeg "Landmarked Deer Mouse mandible")
 
