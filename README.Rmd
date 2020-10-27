@@ -1,5 +1,7 @@
 ---
 title: "README"
+author: "June Grimes"
+date: "10/27/2020"
 output: html_document
 ---
 
@@ -8,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Mandibular Morphovariation Project
-This repo contains information on how small mammals utilize evolutionary response to persist in a changing landscape. 
+This repo contains information on how small mammals' evolutionary response can allow them to persist in a changing landscape. It's part of a greater project looking at how evolutionary and plastic response work in parallel and/or independently to help buffer speciation. 
 
 Landmarking coordinates for each species can be found in the [data folder](https://github.com/Juniper41/mandibular_morphovariation/tree/main/data)
 
