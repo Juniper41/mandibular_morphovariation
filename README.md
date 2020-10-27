@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 # Mandibular Morphovariation Project
-This repo contains information on how small mammals' evolutionary response can allow them to persist in a changing landscape. It's part of a greater project looking at how evolutionary and plastic response work in parallel and/or independently to help buffer speciation. 
+This repo contains information on how small mammals' evolutionary response can allow them to persist in a changing landscape. Evolutionary response will be tracked via mandibular shape change through time. It's part of a greater project looking at how evolutionary and plastic response work in parallel and/or independently to help buffer speciation across temporal and spatial scales. 
 
 Landmarking coordinates for each species can be found in the [data folder](https://github.com/Juniper41/mandibular_morphovariation/tree/main/data)
 
@@ -42,4 +42,7 @@ _If you find a broken link or corrupt file, please create an issue to let me kno
 |11|6090|N/A|
 |12|7556|N/A|
 
+## Images
+
+![Landmarked _P.maniculatus_ mandible.](file:///Users/june/mandibular_morphovariation/mandibular_morphovariation/output/EstimatedPlot%20(2).jpeg "Landmarked Deer Mouse mandible")
 
