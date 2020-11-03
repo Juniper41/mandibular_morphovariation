@@ -5,11 +5,6 @@ date: "10/27/2020"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-
 # Mandibular Morphovariation Project
 This repo contains information on how small mammals' evolutionary response can allow them to persist in a changing landscape. Evolutionary response will be tracked via mandibular shape change through time. It's part of a greater project looking at how evolutionary and plastic response work in parallel and/or independently to help buffer speciation across temporal and spatial scales. 
 
@@ -26,6 +21,7 @@ _If you find a broken link or corrupt file, please create an issue to let me kno
 
 
 ## Temporal Scale
+This project spans a temporal scale in to the mid holocene. Below is the temporal scale I use and the associated date range for each stratum. 
 
 |Stratum|Two Ledges (ybp)|Homestead (ybp)|
 :--|:--|:--|
@@ -44,5 +40,5 @@ _If you find a broken link or corrupt file, please create an issue to let me kno
 
 ## Images
 
-![Landmarked _P.maniculatus_ mandible.](/output/EstimatedPlot (2).jpeg "Landmarked Deer Mouse mandible")
+![Landmarked _P.maniculatus_ mandible.](mandibular_morphovariation/output/estplot.jpeg "Landmarked Deer Mouse mandible")
 
