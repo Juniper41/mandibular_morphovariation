@@ -8,7 +8,7 @@ setwd("/Users/davidtaylor/Google Drive/RodentMandibleImages/TLC/Chaetodipus_form
 list.files() #shows what's in the folder
 
 # Load .tps file containing 2D landmark coordinates, returns an array
-data1 <- readland.tps(file.choose("Cform_est.tps"),specID = "ID")
+data1 <- readland.tps(file.choose("Cform_est.tps"),specID = "ID",negNA = TRUE)
 
 # Check your data
 data1 
@@ -18,6 +18,12 @@ data1
 # Function to perform Procrustes analysis on fixed and sliding landmarks; 
 # ProcD = FALSE slides semilandmarks bases on minimizing bending energy; 
 # If no semilandmarks, curves = NULL is default
+
+gpagen(data1, curves = NULL, surfaces = NULL, PrinAxes = TRUE, max.iter = NULL, ProcD = TRUE, Proj = TRUE)
+estimate.missing(data1, method = "TPS")
+
+data.super <- gpagen(data1, ProcD = FALSE, curves = NULL)
+
 data.super <- gpagen(data1, ProcD = FALSE, curves = NULL, PrinAxes = TRUE, Proj = TRUE)
 summary(data.super) 
 #plots coordinates 
