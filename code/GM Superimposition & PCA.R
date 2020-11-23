@@ -24,10 +24,10 @@ data
 
 # Omit any landmarks with < 50% representation
 data <- data[nth,,]
-
+data <- data[-10,,]
 # Write new TPS file with ommitted landmarks
 ## Save all files as "gspecies_" ... genus first letter and species name"
-writeland.tps(data, "gspecies_excluded.TPS", scale = TRUE,  specID = TRUE)
+writeland.tps(data, "dmicrops_excluded_edit.TPS",  specID = TRUE)
 
 
 # Estimate Missing landmarks.
@@ -72,6 +72,8 @@ quartz()	#this is different for windows users - dev.new() maybe???
 test <- procD.allometry(data.super$coords~ data.super$Csize)
 plot(test, method = "CAC")
 
+test <- procD.lm(coords~Csize, data = data.super)
+
 # find mean shape coordinates for reference
 ref <- mshape(data.super$coords)
 plot(ref)
@@ -81,7 +83,7 @@ plotRefToTarget(ref, data.super$coords[,,3])
 ## Linear regression model procD.lm function quantifies the relative amount of shape variation attributable to one or more factors and assesses this variation via permutation; requires response variable to be in the form of a two-dimensional data matrix rather than a 3D array, two.d.array function converts 3D array of landmark coordinates to 2D data matrix; function returns an ANOVA table of statistical results for each factor
 y <- two.d.array(data.super$coords)
 # Linear regression takes formula for linear model, e.g., y~x1+x2
-procD.lm(y~data.super$Csize, iter = 99)
+procD.lm(y~Csize, data = data.super, iter = 99)
 # Adonis function is also a linear regression model and provides R2 values
 adonis(y~data.super$Csize, method = "euclidean")
 ###  Of procD.lm() and adonis(), I prefer, and most often use the adonis function, because it returns an R2 value
