@@ -17,14 +17,27 @@ list.files() #shows what's in the folder
 
  
 # Load .tps file containing 2D landmark coordinates, returns an array
-data <- readland.tps(file.choose(),specID = "ID")		# load ___OverlapDeleted	
+data <- readland.tps(file.choose(),specID = "ID", negNA = TRUE)		# load ___OverlapDeleted	
 
+# View your Data
 data
 
-Nlep_est <- estimate.missing(data,method="TPS")
+# Omit any landmarks with < 50% representation
+data <- data[nth,,]
+
+# Write new TPS file with ommitted landmarks
+## Save all files as "gspecies_" ... genus first letter and species name"
+writeland.tps(data, "gspecies_excluded.TPS", scale = TRUE,  specID = TRUE)
+
+
+# Estimate Missing landmarks.
+## Save as gspecies_est i.e. Dmicrops_est
+gspecies_est <- estimate.missing(data,method="TPS")
 estimate.missing(data,method="TPS")
 
-writeland.tps(Zprin_est, "Zprin_est.tps", scale = NULL, specID = TRUE)
+
+#Save TPS file with estimated landmark coordinates. 
+writeland.tps(gspecies_est, "gspecies_est.TPS", scale = NULL, specID = TRUE)
 
 
 # Load .nts file containing sliders
@@ -34,7 +47,7 @@ sliders <- as.matrix(sliders)
 
 
 # Function to perform Procrustes analysis on fixed and sliding landmarks; ProcD = FALSE slides semilandmarks bases on minimizing bending energy; If no semilandmarks, curves = NULL is default
-data.super <- gpagen(Zprin_est, ProcD = FALSE, curves = NULL)
+data.super <- gpagen(gspecies_est, ProcD = FALSE, curves = NULL)
 
 
 # to quickly replot superimposition
