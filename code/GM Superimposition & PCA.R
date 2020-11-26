@@ -23,8 +23,11 @@ data <- readland.tps(file.choose(),specID = "ID", negNA = TRUE)		# load ___Overl
 data
 
 # Omit any landmarks with < 50% representation
-data <- data[nth,,]
-data <- data[-10,,]
+### note each omission shifts subsequent LM, if you omit 13th LM, 14th LM becomes 13th LM
+###data <- data[nth,,]
+data <- data[-10,,] #exclude 10th landmark
+data <- data[-5,,]
+
 # Write new TPS file with ommitted landmarks
 ## Save all files as "gspecies_" ... genus first letter and species name"
 writeland.tps(data, "dmicrops_excluded_edit.TPS",  specID = TRUE)
@@ -32,7 +35,7 @@ writeland.tps(data, "dmicrops_excluded_edit.TPS",  specID = TRUE)
 
 # Estimate Missing landmarks.
 ## Save as gspecies_est i.e. Dmicrops_est
-gspecies_est <- estimate.missing(data,method="TPS")
+nlepida_est <- estimate.missing(data,method="TPS")
 estimate.missing(data,method="TPS")
 
 
@@ -47,7 +50,7 @@ sliders <- as.matrix(sliders)
 
 
 # Function to perform Procrustes analysis on fixed and sliding landmarks; ProcD = FALSE slides semilandmarks bases on minimizing bending energy; If no semilandmarks, curves = NULL is default
-data.super <- gpagen(gspecies_est, ProcD = FALSE, curves = NULL)
+data.super <- gpagen(nlepida_est, ProcD = FALSE, curves = NULL)
 
 
 # to quickly replot superimposition
@@ -69,7 +72,7 @@ specimens <- names(data.super$Csize)
 
 # Plot allometric patterns in landmark data
 quartz()	#this is different for windows users - dev.new() maybe???
-test <- procD.allometry(data.super$coords~ data.super$Csize)
+test <- procD.lm(coords~Csize, data = data.super)
 plot(test, method = "CAC")
 
 test <- procD.lm(coords~Csize, data = data.super)
@@ -78,7 +81,7 @@ test <- procD.lm(coords~Csize, data = data.super)
 ref <- mshape(data.super$coords)
 plot(ref)
 # compare individuals to mean reference
-plotRefToTarget(ref, data.super$coords[,,3])
+plotRefToTarget(ref, data.super$coords[,,41])
 
 ## Linear regression model procD.lm function quantifies the relative amount of shape variation attributable to one or more factors and assesses this variation via permutation; requires response variable to be in the form of a two-dimensional data matrix rather than a 3D array, two.d.array function converts 3D array of landmark coordinates to 2D data matrix; function returns an ANOVA table of statistical results for each factor
 y <- two.d.array(data.super$coords)
@@ -469,12 +472,8 @@ quartz.options(height=10, width=10, dpi = 72)
 plotAllometry(shapeStandArray, size.means, method = "CAC")
 
 
+nlep_df <- data.frame(nlepida_est)
+nlep_df
+data.super$Csize
 
-
-
-
-
-
-
-
-
+nlep_df <- data.frame(data.super$Csize)
