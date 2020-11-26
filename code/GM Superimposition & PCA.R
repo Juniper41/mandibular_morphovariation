@@ -471,9 +471,3 @@ shapeStandArray <- arrayspecs(shapeStand,126,2, byLand = FALSE)
 quartz.options(height=10, width=10, dpi = 72)
 plotAllometry(shapeStandArray, size.means, method = "CAC")
 
-
-nlep_df <- data.frame(nlepida_est)
-nlep_df
-data.super$Csize
-
-nlep_df <- data.frame(data.super$Csize)
