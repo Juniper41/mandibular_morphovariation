@@ -1,15 +1,9 @@
----
-title: "README"
-author: "June Grimes"
-date: "10/27/2020"
-output: html_document
----
 <!-- PROJECT LOGO -->
 
 <br />
 <p align="center">
   <a href="https://github.com/Juniper41/mandibular_morphovariation">
-    <img src="krat_logo.png" alt="Logo" width="500" height="393">
+    <img src="Krat_logo.png" alt="Logo" width="500" height="393">
   </a>
 
   <h3 align="center">Mandibular Morphovariation Project</h3>
