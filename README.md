@@ -15,7 +15,7 @@ Landmarking coordinates for each species can be found in the [data folder](https
 
 ## Study Systems
 <br />
-<p align="center">
+<p align="right">
   <a href="https://github.com/Juniper41/mandibular_morphovariation">
     <img src="Great_Basin_Map.png" alt="Logo" width="400" height="310">
   </a>
