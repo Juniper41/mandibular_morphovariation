@@ -14,6 +14,12 @@ This repo contains information on how small mammals' evolutionary response can a
 Landmarking coordinates for each species can be found in the [data folder](https://github.com/Juniper41/mandibular_morphovariation/tree/main/data)
 
 ## Study Systems
+<br />
+<p align="center">
+  <a href="https://github.com/Juniper41/mandibular_morphovariation">
+    <img src="Great_Basin_Map.png" alt="Logo" width="400" height="310">
+  </a>
+  
 This project looks at morphological variation of small mammal dentary bones from Two Ledges Chamber, NV and Homestead Cave, UT over the last ~10,000 years. This is just one of the proxies at understanding how small mammals adapt to a changing landscape. 
 
 The two systems have different anthropogenic histories and resource bases. 
@@ -51,8 +57,3 @@ This project spans a temporal scale in to the mid holocene. Below is the tempora
 *Stratum*: a layer or a series of layers of rock in the ground
 
 *ypb*: years before present
-
-## Images
-
-![Landmarked _P.maniculatus_ mandible.](mandibular_morphovariation/output/estplot.jpeg "Landmarked Deer Mouse mandible")
-
