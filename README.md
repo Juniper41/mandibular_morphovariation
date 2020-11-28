@@ -8,7 +8,7 @@ output: html_document
 
 <br />
 <p align="center">
-  <a href="https://github.com/jessealaney/North_America_Passerine_Diversity_Dimensionality">
+  <a href="https://github.com/Juniper41/mandibular_morphovariation/blob/main/Krat_logo.png">
     <img src="krat_logo.png" alt="Logo" width="500" height="393">
   </a>
 
