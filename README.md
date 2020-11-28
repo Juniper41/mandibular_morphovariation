@@ -4,7 +4,16 @@ author: "June Grimes"
 date: "10/27/2020"
 output: html_document
 ---
+<!-- PROJECT LOGO -->
 
+<br />
+<p align="center">
+  <a href="https://github.com/jessealaney/North_America_Passerine_Diversity_Dimensionality">
+    <img src="krat_logo.png" alt="Logo" width="500" height="393">
+  </a>
+
+  <h3 align="center">Mandibular Morphovariation Project</h3>
+  
 # Mandibular Morphovariation Project
 This repo contains information on how small mammals' evolutionary response can allow them to persist in a changing landscape. Evolutionary response will be tracked via mandibular shape change through time. It's part of a greater project looking at how evolutionary and plastic response work in parallel and/or independently to help buffer speciation across temporal and spatial scales. 
 
@@ -19,7 +28,14 @@ The two systems have different anthropogenic histories and resource bases.
 
 _If you find a broken link or corrupt file, please create an issue to let me know!_
 
+## Packages Needed
 
+ Install R packages
+```sh
+install.packages("geomorph")
+install.packages("shapes")
+install.packages("vegan")
+```
 ## Temporal Scale
 This project spans a temporal scale in to the mid holocene. Below is the temporal scale I use and the associated date range for each stratum. 
 
@@ -39,6 +55,7 @@ This project spans a temporal scale in to the mid holocene. Below is the tempora
 |12|7556 (19-20)|N/A|
 
 *Stratum*: a layer or a series of layers of rock in the ground
+
 *ypb*: years before present
 
 ## Images
