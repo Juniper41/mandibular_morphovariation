@@ -23,20 +23,23 @@ _If you find a broken link or corrupt file, please create an issue to let me kno
 ## Temporal Scale
 This project spans a temporal scale in to the mid holocene. Below is the temporal scale I use and the associated date range for each stratum. 
 
-|TLC/HC Splits|Stratum|Two Ledges (ybp)|Homestead (ybp)|
-:--|:--|:--|:--|
-Bulk|1|Modern|Modern|
-1-2 / 18|2|288|150|
-3-4 / 17|3|317|930|
-5-6 / 16|4|884|1095|
-7-8 / 12|5|1709|3640|
-9 / 11|6|2251|5377|
-10 / 9|7|2597|6752|
-11|8|2955|N/A|
-12-13|9|3553|N/A|
-14-16|10|4960|N/A|
-17-18|11|6090|N/A|
-19-20|12|7556|N/A|
+|Stratum|Two Ledges ybp (Splits)|Homestead ybp (Splits)|
+:--|:--|:--|
+|1|Modern|Modern|
+|2|288 (1-2)|150 (18)|
+|3|317 (3-4)|930 (17)|
+|4|88 (5-6)|1095 (16)|
+|5|1709 (7-8)|3640 (12)|
+|6|2251 (9)|5377 (11)|
+|7|2597 (10)|6752 (9)|
+|8|2955 (11)|N/A|
+|9|3553 (12-13)|N/A|
+|10|4960 (15-16)|N/A|
+|11|6090 (17-18)|N/A|
+|12|7556 (19-20)|N/A|
+
+*Stratum*: a layer or a series of layers of rock in the ground
+*ypb*: years before present
 
 ## Images
 
