@@ -7,8 +7,7 @@ library(ggtext)
 dmicrops_df <- data.frame(data.super$Csize)
 
 #Group By Stratums
-stratum <- c(rep(2, times=21), rep(3, times = 15), rep(4, times =3), rep(5, times = 6), rep(6, times = 9), rep(7, times = 6), rep(10, times =6), rep(11, times =6))
-
+stratum <- c(rep("02", times=12), rep("06", times =9), rep("12", times = 3))
 #Grouped by 1,500 intervals
 #Nlep# stratum <- c(rep("1500", times=36), rep("3000", times =9), rep("4500", times = 15), rep("6000", times =12))
 #plong
@@ -21,7 +20,7 @@ dmicrops_df$stratum <- stratum
 ggplot(dmicrops_df, aes(group=stratum, x = stratum, y=data.super$Csize, fill=stratum)) + 
   geom_boxplot()+
   ggtitle(my_title)+
-  xlab("YBP")+
+  xlab("Stratum")+
   ylab("Mean Centroid Size")
 facet_wrap(~group, scale="free")
 

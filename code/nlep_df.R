@@ -4,24 +4,24 @@ library(pylr)
 library(ggtext)
 
 #make into dataframe
-plong_df <- data.frame(data.super$Csize)
+nlepida_df <- data.frame(data.super$Csize)
 
 #Group By Stratums
-stratum <- c(rep(2, times=21), rep(3, times = 15), rep(4, times =3), rep(5, times = 6), rep(6, times = 9), rep(7, times = 6), rep(10, times =6), rep(11, times =6))
+stratum <- c(rep("02", times=21), rep("03", times = 15), rep("04", times =3), rep("05", times = 6), rep("06", times = 9), rep("07", times = 6), rep("10", times =6), rep("11", times =6))
 
 #Grouped by 1,500 intervals
-#Nlep# stratum <- c(rep("1500", times=36), rep("3000", times =9), rep("4500", times = 15), rep("6000", times =12))
+stratum <- c(rep("02-03", times=36), rep("04-07", times =24), rep("10-11", times =12))
 #plong
 
-stratum <- c(rep("02 & 03", times=21), rep("06 & 07", times =33), rep("10", times = 6))
-
 #add stratum column to dataframe
-plong_df$stratum <- stratum
+nlepida_df$stratum <- stratum
 
-ggplot(plong_df, aes(group=stratum, x = stratum, y=data.super$Csize, fill=stratum)) + 
+my_title <- expression(paste(italic("N. lepida")))
+
+ggplot(nlepida_df, aes(group=stratum, x = stratum, y=data.super$Csize, fill=stratum)) + 
   geom_boxplot()+
   ggtitle(my_title)+
-  xlab("YBP")+
+  xlab("Stratum")+
   ylab("Mean Centroid Size")
   facet_wrap(~group, scale="free")
 
@@ -32,5 +32,5 @@ ggplot(plong_df, aes(group=stratum, x = stratum, y=data.super$Csize, fill=stratu
   #theme_classic()+
   #scale_fill_discrete(name= "Legend")
 
-my_title <- expression(paste(italic("P. longimembris")))
+
   

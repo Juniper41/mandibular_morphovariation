@@ -35,7 +35,7 @@ writeland.tps(data, "dmicrops_excluded_edit.TPS",  specID = TRUE)
 
 # Estimate Missing landmarks.
 ## Save as gspecies_est i.e. Dmicrops_est
-nlepida_est <- estimate.missing(data,method="TPS")
+ncinerea_est <- estimate.missing(data,method="TPS")
 estimate.missing(data,method="TPS")
 
 
@@ -50,7 +50,7 @@ sliders <- as.matrix(sliders)
 
 
 # Function to perform Procrustes analysis on fixed and sliding landmarks; ProcD = FALSE slides semilandmarks bases on minimizing bending energy; If no semilandmarks, curves = NULL is default
-data.super <- gpagen(nlepida_est, ProcD = FALSE, curves = NULL)
+data.super <- gpagen(ncinerea_est, ProcD = FALSE, curves = NULL)
 
 
 # to quickly replot superimposition
