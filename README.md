@@ -8,7 +8,7 @@
 
   <h3 align="center">Mandibular Morphovariation Project</h3>
   
-# Mandibular Morphovariation Project
+# Mandibular Morphovariation Project 
 This repo contains information on how small mammals' evolutionary response can allow them to persist in a changing landscape. Evolutionary response will be tracked via mandibular shape change through time. It's part of a greater project looking at how evolutionary and plastic response work in parallel and/or independently to help buffer speciation across temporal and spatial scales. 
 
 Landmarking coordinates for each species can be found in the [data folder](https://github.com/Juniper41/mandibular_morphovariation/tree/main/data)
@@ -44,7 +44,7 @@ This project spans a temporal scale in to the mid holocene. Below is the tempora
 |1|Modern|Modern|
 |2|288 (1-2)|150 (18)|
 |3|317 (3-4)|930 (17)|
-|4|88 (5-6)|1095 (16)|
+|4|884 (5-6)|1095 (16)|
 |5|1709 (7-8)|3640 (12)|
 |6|2251 (9)|5377 (11)|
 |7|2597 (10)|6752 (9)|
