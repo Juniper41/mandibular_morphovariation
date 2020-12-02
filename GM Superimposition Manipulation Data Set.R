@@ -15,7 +15,7 @@ require(geomorph)
 setwd('C:/Users/3099lab/Google Drive/RodentMandibleImages/TLC/Peromyscus_maniculatus') #you'll want to change this
 list.files() #shows what's in the folder
 
- 
+
 # Load .tps file containing 2D landmark coordinates, returns an array
 data <- readland.tps(file.choose(),specID = "ID", negNA = TRUE)		# load ___OverlapDeleted	
 
@@ -26,7 +26,7 @@ data
 ### note each omission shifts subsequent LM, if you omit 13th LM, 14th LM becomes 13th LM
 ###data <- data[nth,,]
 data <- data[-10,,] #exclude 10th landmark
-data <- data[-5,,]
+data <- data[-9,,]
 
 # Write new TPS file with ommitted landmarks
 ## Save all files as "gspecies_" ... genus first letter and species name"
@@ -35,7 +35,7 @@ writeland.tps(data, "dmicrops_excluded_edit.TPS",  specID = TRUE)
 
 # Estimate Missing landmarks.
 ## Save as gspecies_est i.e. Dmicrops_est
-cformosus_est <- estimate.missing(data,method="TPS")
+dmicrops_est <- estimate.missing(data,method="TPS")
 estimate.missing(data,method="TPS")
 
 
@@ -50,7 +50,7 @@ sliders <- as.matrix(sliders)
 
 
 # Function to perform Procrustes analysis on fixed and sliding landmarks; ProcD = FALSE slides semilandmarks bases on minimizing bending energy; If no semilandmarks, curves = NULL is default
-data.super <- gpagen(cformosus_est, ProcD = FALSE, curves = NULL)
+data.super <- gpagen(dmicrops_est, ProcD = FALSE, curves = NULL)
 
 
 # to quickly replot superimposition
@@ -81,7 +81,7 @@ test <- procD.lm(coords~Csize, data = data.super)
 ref <- mshape(data.super$coords)
 plot(ref)
 # compare individuals to mean reference
-plotRefToTarget(ref, data.super$coords[,,41])
+plotRefToTarget(ref, data.super$coords[,,68])
 
 ## Linear regression model procD.lm function quantifies the relative amount of shape variation attributable to one or more factors and assesses this variation via permutation; requires response variable to be in the form of a two-dimensional data matrix rather than a 3D array, two.d.array function converts 3D array of landmark coordinates to 2D data matrix; function returns an ANOVA table of statistical results for each factor
 y <- two.d.array(data.super$coords)
@@ -117,7 +117,7 @@ summary(manova(lm(PCinput~data.super$Csize)))
 randCol <- rainbow(14)
 indCol <- NULL
 for(i in randCol){
-	indCol <- c(indCol, rep(i, times = 3))
+  indCol <- c(indCol, rep(i, times = 3))
 }
 plot(pca$x[,1:2], asp=1, pch=19, col = indCol, cex = 2)  
 
@@ -134,7 +134,7 @@ for(i in randCol){
 adonis(y~spData$Individual, method = "euclidean")
 
 # Plot pc1 against centroid size
-plot(pca$x[,1]~log(data.super$Csize), pch = 21, bg = "black",ylab = "PC1", xlab = "log(Centroid Size)" )  #similar plot to plotAllometry
+plot(pca$x[,1]~log(data.super$Csize), pch = 21, bg = "black",ylab = "PC1", xlab = "log(Centroid Size)")  #similar plot to plotAllometry
 
 
 ### So far, we've been playing around with all the data, but in reality each individual is represented by four digitized photos and therefore 4 sets of shape coordinates; in order to do proper analysis, we should average 4 sets of shape coordinates (and size) to get one value for each individual.  ###
@@ -152,8 +152,8 @@ colnames(spData)  # column names
 # Avg shape
 allInd.means <- NULL
 for(i in 1:ncol(y)){
-	mean.temp <- tapply(y[,i], spData$Individual, mean)
-	allInd.means <- cbind(allInd.means, mean.temp)
+  mean.temp <- tapply(y[,i], spData$Individual, mean)
+  allInd.means <- cbind(allInd.means, mean.temp)
 }
 
 # Avg size (either do this a different way, or modify for your dataset...)
@@ -224,24 +224,24 @@ quartz.options(height=5, width=2, dpi = 72)
 plot.new()
 plot.window(xlim = c(1,2), ylim = c(0,8))
 for(i in ypts){
-	polygon(x = c(xpts[2:1], xpts), y = c(ypts[i], ypts[i], ypts[i+1], ypts[i+1]), col = colSeq[i])
+  polygon(x = c(xpts[2:1], xpts), y = c(ypts[i], ypts[i], ypts[i+1], ypts[i+1]), col = colSeq[i])
 }
 
 
 #### Function to remove the effects of allometry (Size standardize your shape data)
 Size.stand = function(data,X)
 {
-N=nrow(data)
-X=as.vector(log(X))
-meanX=mean(X)
-meanXc=c(1,meanX)
-model1=lm(data~X)
-shapeMean=as.numeric(crossprod(coef(model1),meanXc))
-model1.res<-as.matrix(model1$res)
-meanShape=rep(1,N)%*%t(shapeMean)
-#Add residuals to minimum and and max values
-shapeMean.stand<-model1.res+meanShape
-stand=as.matrix(shapeMean.stand)
+  N=nrow(data)
+  X=as.vector(log(X))
+  meanX=mean(X)
+  meanXc=c(1,meanX)
+  model1=lm(data~X)
+  shapeMean=as.numeric(crossprod(coef(model1),meanXc))
+  model1.res<-as.matrix(model1$res)
+  meanShape=rep(1,N)%*%t(shapeMean)
+  #Add residuals to minimum and and max values
+  shapeMean.stand<-model1.res+meanShape
+  stand=as.matrix(shapeMean.stand)
 }
 
 # Run the function on our data:
