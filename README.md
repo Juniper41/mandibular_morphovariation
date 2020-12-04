@@ -57,3 +57,17 @@ This project spans a temporal scale in to the mid holocene. Below is the tempora
 *Stratum*: a layer or a series of layers of rock in the ground
 
 *ypb*: years before present
+
+## Species List
+
+|Species|Average Body Mass (g)|Functional Group|
+:--|:--|:--|
+|P. maniculatus|10-24|Omnivore|
+|N. lepida|122-350|Herbivore|
+|N. cinerea|335|Herbivore|
+|D. microps|55|Herbivore|
+|C. formosus|10-17|Granivore|
+|P. parvus|20|Granivore|
+|P. longimembris|8-10|Granivore|
+
+ 
