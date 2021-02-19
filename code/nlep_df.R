@@ -34,6 +34,7 @@ ggplot(nlepida_vector_df, aes(group=stratum, x = stratum, y=nlepida_vector, fill
 
 save(nlepida_df, file="nlepida_df.RDa")
 
+write.csv(nlepida_df,file = "nlepCS.csv")
 
 #Average each series of 3 mandibles to one Centroid Size Measure
 nlepida_vector <- .colMeans(data.super$Csize, 3, length(data.super$Csize) / 3)

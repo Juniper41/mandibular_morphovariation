@@ -5,7 +5,7 @@ library(ggtext)
 
 #make into dataframe
 dmicrops_df <- data.frame(data.super$Csize)
-dmicrops_df <- dmicrops_df[-0,,]
+dmicrops_df <- dmicrops_df[-0,]
 
 Csize <- data.super$Csize
 
@@ -43,3 +43,5 @@ my_title <- expression(paste(italic("D. microps")))
 save(dmicrops_df)
 save(file=dmicrops_df)
 save(dmicrops_df, file="dmicrops_df.RDa")
+
+write.csv(dmicrops_df,file = "dmicropsCS.csv")

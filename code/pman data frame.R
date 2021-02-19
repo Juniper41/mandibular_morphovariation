@@ -41,3 +41,5 @@ save(nlepida_df, file="nlepida_df.RDa")
 #Average each series of 3 mandibles to one Centroid Size Measure
 nlepida_vector <- .colMeans(data.super$Csize, 3, length(data.super$Csize) / 3)
 nlepida_vector_df <- data.frame(nlepida_vector)
+
+write.csv(pman_df,file = "pmanCS.csv")
