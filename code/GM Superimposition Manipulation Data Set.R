@@ -35,7 +35,7 @@ writeland.tps(data, "dmicrops_excluded_edit.TPS",  specID = TRUE)
 
 # Estimate Missing landmarks.
 ## Save as gspecies_est i.e. Dmicrops_est
-dmicrops_est <- estimate.missing(data,method="TPS")
+cfor_est <- estimate.missing(data,method="TPS")
 estimate.missing(data,method="TPS")
 
 
@@ -50,7 +50,7 @@ sliders <- as.matrix(sliders)
 
 
 # Function to perform Procrustes analysis on fixed and sliding landmarks; ProcD = FALSE slides semilandmarks bases on minimizing bending energy; If no semilandmarks, curves = NULL is default
-data.super <- gpagen(dmicrops_est, ProcD = FALSE, curves = NULL)
+data.super <- gpagen(cfor_est, ProcD = FALSE, curves = NULL)
 
 
 # to quickly replot superimposition
@@ -83,6 +83,7 @@ plot(ref)
 # compare individuals to mean reference
 plotRefToTarget(ref, data.super$coords[,,68])
 
+
 ## Linear regression model procD.lm function quantifies the relative amount of shape variation attributable to one or more factors and assesses this variation via permutation; requires response variable to be in the form of a two-dimensional data matrix rather than a 3D array, two.d.array function converts 3D array of landmark coordinates to 2D data matrix; function returns an ANOVA table of statistical results for each factor
 y <- two.d.array(data.super$coords)
 # Linear regression takes formula for linear model, e.g., y~x1+x2
@@ -103,6 +104,11 @@ summary(pca)
 # plot PCA
 plot(pca$x[1:4,1:2], asp=1, pch=21, col = "black")  ### plots PC1 and PC2 of 4 toothrows of one ind
 plot(pca$x[,1:2], asp=1, pch=21, col = "coral")  ### plots all inds in dataset
+
+plot(pca$x[,1:2], asp=1, pch = 19, col = c(rep("red", 27), rep("chartreuse", 15), rep("turquoise", 15), rep("gold", 15)))
+
+######
+plot(cformosus_df$data.super.Csize, group=stratum)
 
 # to identify what point belongs to which specimen, you can use the identify function: It produces a cross-hair, position the crosshair on a point in your plot and click to provide a label.  When you are done, hit escape to get out of identify function.
 identify(x = pca$x[,1], y = pca$x[,2], labels = specimens)

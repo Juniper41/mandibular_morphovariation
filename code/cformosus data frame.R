@@ -8,7 +8,7 @@ cformosus_df <- data.frame(data.super$Csize)
 
 #Group By Stratums
 stratum <- c(rep("02", times=15), rep("04", times = 12), rep("06", times = 15), rep("10", times =15), rep("11", times =15))
-
+stratum <- c(rep("modern", times =30), rep("middle", times = 15), rep("early", times = 30))
 #add stratum column to dataframe
 cformosus_df$stratum <- stratum
 
