@@ -7,6 +7,10 @@
 library(vegan)
 library(shapes)
 library(geomorph)
+library(ggplot2)
+library(ggfortify)
+library(ggpubr)
+library(ggbiplot)
 
 require(vegan)
 require(shapes)
@@ -26,33 +30,36 @@ data
 ### note each omission shifts subsequent LM, if you omit 13th LM, 14th LM becomes 13th LM
 ###data <- data[nth,,]
 data <- data[-10,,] #exclude 10th landmark
-data <- data[-9,,]
+data <- data[-6,,]
+data <- data[-5,,]
+data <- data[-8,,]
+data <- data[-7,,]
 
 # Write new TPS file with ommitted landmarks
 ## Save all files as "gspecies_" ... genus first letter and species name"
-writeland.tps(data, "dmicrops_excluded_edit.TPS",  specID = TRUE)
+# writeland.tps(data, "dmicrops_excluded_edit.TPS",  specID = TRUE)
 
 
 # Estimate Missing landmarks.
-## Save as gspecies_est i.e. Dmicrops_est
-cfor_est <- estimate.missing(data,method="TPS")
+nlep_est <- estimate.missing(data,method="TPS")
 estimate.missing(data,method="TPS")
 
 
 #Save TPS file with estimated landmark coordinates. 
-writeland.tps(gspecies_est, "gspecies_est.TPS", scale = NULL, specID = TRUE)
+# writeland.tps(gspecies_est, "gspecies_est.TPS", scale = NULL, specID = TRUE)
 
-
+writeland.tps(d_est, "dmicrops.TPS", scale = NULL, specID = TRUE)
 # Load .nts file containing sliders
-sliders <- read.table(file.choose())	# load ___SlidersEdited file (first two lines should be deleted from the original sliders file)
+#sliders <- read.table(file.choose())	# load ___SlidersEdited file (first two lines should be deleted from the original sliders file)
 # convert to matrix format
-sliders <- as.matrix(sliders)
+#sliders <- as.matrix(sliders)
 
 
 # Function to perform Procrustes analysis on fixed and sliding landmarks; ProcD = FALSE slides semilandmarks bases on minimizing bending energy; If no semilandmarks, curves = NULL is default
-data.super <- gpagen(cfor_est, ProcD = FALSE, curves = NULL)
+data.super <- gpagen(dmicrops_est, ProcD = FALSE, curves = NULL)
 
-
+#data.super <- gpagen(data, ProcD = FALSE, curves = NULL)
+#datacomb <- gpagen(yall, ProcD = FALSE, curves = NULL)
 # to quickly replot superimposition
 plotAllSpecimens(data.super$coords)		#same plot as gpagen()
 specimens <- names(data.super$Csize)
@@ -67,11 +74,11 @@ names(data.super)
 # Extract specimen names
 specimens <- names(data.super$Csize)
 
-
+specimens <- names(yall)
 ## Plots and analyses ##
 
 # Plot allometric patterns in landmark data
-quartz()	#this is different for windows users - dev.new() maybe???
+#quartz()	#this is different for windows users - dev.new() maybe???
 test <- procD.lm(coords~Csize, data = data.super)
 plot(test, method = "CAC")
 
@@ -81,42 +88,123 @@ test <- procD.lm(coords~Csize, data = data.super)
 ref <- mshape(data.super$coords)
 plot(ref)
 # compare individuals to mean reference
-plotRefToTarget(ref, data.super$coords[,,68])
+plotRefToTarget(ref, data.super$coords[,,4])
 
 
 ## Linear regression model procD.lm function quantifies the relative amount of shape variation attributable to one or more factors and assesses this variation via permutation; requires response variable to be in the form of a two-dimensional data matrix rather than a 3D array, two.d.array function converts 3D array of landmark coordinates to 2D data matrix; function returns an ANOVA table of statistical results for each factor
 y <- two.d.array(data.super$coords)
+#y2 <- two.d.array(data.super$coords)
 # Linear regression takes formula for linear model, e.g., y~x1+x2
 procD.lm(y~Csize, data = data.super, iter = 99)
 # Adonis function is also a linear regression model and provides R2 values
 adonis(y~data.super$Csize, method = "euclidean")
 ###  Of procD.lm() and adonis(), I prefer, and most often use the adonis function, because it returns an R2 value
 
+###merge
+#yall2 <- yall
+#yall <- merge(y, yall, all = TRUE, sort = FALSE)
 
+
+#Save 2D coords as CSV
+write.csv(yall, file = "yall.csv")
 
 ## PCA analysis
 # prcomp function conducts a pca on a 2D array
-pca <- prcomp(y)
+
+pca <- prcomp(yall[1:24])
+#pca <- prcomp(y[,1:24])
+#pca <- prcomp(y)
+
 # specimen list
 rownames(pca$x)
+
+###Extract PCA1 scores
+pc1 <- as.data.frame(pca$x[,1])
+
 # summary of PCA
 summary(pca)
+
 # plot PCA
 plot(pca$x[1:4,1:2], asp=1, pch=21, col = "black")  ### plots PC1 and PC2 of 4 toothrows of one ind
 plot(pca$x[,1:2], asp=1, pch=21, col = "coral")  ### plots all inds in dataset
 
-plot(pca$x[,1:2], asp=1, pch = 19, col = c(rep("red", 27), rep("chartreuse", 15), rep("turquoise", 15), rep("gold", 15)))
+plot(pca$x[,1:2], asp=1, pch = 19, col = c (rep("gold2", 12), rep("yellow", 10), rep("darkcyan", 5), rep("turquoise", 26), rep("salmon", 27), rep("darkgreen", 28), rep("darkgreen", 15), rep("chartreuse", 15), rep("black", 15)))
+
+autoplot(pca, data = yall2, pch = 19, colour = "new_col", size = 10, loadings = TRUE, loadings.label = TRUE, loadings.colour = "azure3", loadings.label.colour = "bisque4", scale = 1) + 
+  scale_color_manual(values = wes_palette("IsleofDogs1")) +
+  theme(legend.position="top")
+
+autoplot(pca, data = yall2, colour = "new_col", group = "new_col", frame = TRUE,frame.type = "t", size = 4,
+         loadings = TRUE, loadings.label = TRUE, loadings.colour = "darkcyan", 
+         loadings.label.colour = "red", loadings.label.vjust = 1.6) + 
+     scale_color_manual(name = "Species:",
+                          values = wes_palette("IsleofDogs1"))+
+  scale_fill_manual(values = wes_palette("IsleofDogs1"))+
+     theme(legend.position="top")+
+  labs(color = "Species:") +
+  guides(color = guide_legend(override.aes = list(size = 5)))
+  
+
+####indiv Species PCA
+
+autoplot(pca, data = y, colour = "spits", size = 8,
+         loadings = TRUE, loadings.label = TRUE, loadings.colour = "bisque4", 
+         loadings.label.colour = "black", loadings.label.vjust = 1.6) + 
+  scale_color_manual(values = wes_palette("Darjeeling1"))+
+  theme(legend.position="top")+
+  labs(color = "spits:") +
+  guides(color = guide_legend(override.aes = list(size = 5)))
+
+cfdata <- cforpositivecoords
+ggplot(cfcsdf, aes("spec", "cfcs"))
+plot(cfdf$spec, cfdf$cfdf, pch = 19, col = c(rep("gold2", 5), rep("salmon", 4), rep("darkcyan", 15), rep("turquoise1", 4), rep("bisque4", 5)))
+
+
+ggplot(cfdf, aes(group=cf2, x = cf2, y=cfdf, fill=cf2)) + 
+  geom_boxplot()+
+  ggtitle(my_title)+
+  xlab("Stratum")+
+  ylab("Mean Centroid Size")+
+  scale_fill_manual(values = wes_palette("Royal1"))
+facet_wrap(~group, scale="free")
+
+                                            
+                                            
+######add Ellipse
+#stat_ellipse(aes(color=new_col, group=new_col))+
+
+
+####NMS####
+cfnms <- metaMDS(cfdata[2:25], distance = "bray" )
+
+
+data.scores <- as.data.frame(scores(cfnms))
+data.scores$species <- rownames(data.scores)
+data.scores$stratum <- cf
+cf <- c(rep("0-200 ybp", 5), rep("100-300 ybp", 4), rep("1700-2500 ybp", 15), rep("4900 ybp", 5), rep("6090-7550 ybp", 5))
+
+plot(cfnms)
+points(cfnms, display = "species", pch=21, col="red", bg="yellow")
+text(cfnms, display = "species", cex=0.7, col="blue")
+
+
+ggplot() + 
+  geom_text(data=data.scores,aes(x=NMDS1,y=NMDS2,label=species),alpha=0.5) +  # add the species labels
+  geom_point(data=data.scores,aes(x=NMDS1,y=NMDS2,colour=stratum),size=19) + # add the point markers
+  geom_text(data=data.scores,aes(x=NMDS1,y=NMDS2,label=species),size=6,vjust=0.4) +  # add the site labels
+  scale_colour_manual(values=wes_palette("Darjeeling1")) +
+  coord_equal() +
+  theme_bw()
 
 ######
-plot(cformosus_df$data.super.Csize, group=stratum)
 
 # to identify what point belongs to which specimen, you can use the identify function: It produces a cross-hair, position the crosshair on a point in your plot and click to provide a label.  When you are done, hit escape to get out of identify function.
 identify(x = pca$x[,1], y = pca$x[,2], labels = specimens)
 
 
 # Multivariate Manova Linear Regression: conduct a PCA reduction first, then input PC's as dependent variables. Choose how many PC's you would like to use (~97% of variance, or N/4 where N is the sample size)
-PCinput <- pca$x[,1:6]
-summary(manova(lm(PCinput~data.super$Csize)))
+PCinput <- pca$x[,1:2]
+summary(manova(lm(PCinput~y[,25])))
 
 
 # plot all inds with own color in dataset
@@ -164,14 +252,14 @@ for(i in 1:ncol(y)){
 
 # Avg size (either do this a different way, or modify for your dataset...)
 size.means<- NULL
-seqn <- seq(from =1, to = 8, by =2) #####  seqn <- c(1,4,7,10,13,17,21,24,27,31,34,37,40,43)
+seqn <- seq(from =1, to = 45, by =2) #####  seqn <- c(1,4,7,10,13,17,21,24,27,31,34,37,40,43)
 for(i in seqn){
   size <- mean(data.super$Csize[i:(i+1)])
   size.means <- c(size.means, size)
 }
 
 ## Now, it is a good idea to re-superimpose your data; To do so, you have to get the average shape data into the correct format for gpagen:
-shape.means <- arrayspecs(allInd.means,1,2)
+shape.means <- arrayspecs(allInd.means,13,2)
 # Now superimpose mean individuals:
 mean.super <- gpagen(shape.means)
 plotAllSpecimens(mean.super$coords)	
@@ -188,7 +276,7 @@ dim(indData)
 #Check geomorph package for more functions and analyses - for instance, you can look at bilateral asymmetry; another good thing to check is sexual dimorphism in size or shape (for modern specimens)
 
 quartz.options(height = 7, width = 10, dpi =72)
-allometryResults <- procD.allometry(mean.super$coords~size.means)
+allometryResults <- procD.lm(mean.super$coords~size.means)
 plot(allmetryResults, method = "CAC")
 
 shapePCA <- prcomp(shape)
